@@ -5,6 +5,6 @@ require "lsp"
 
 require "plugins"
 
-require "pconf.telescope"
-require "pconf.treesitter"
-require "pconf.nvim-tree"
+require "config.telescope"
+require "config.treesitter"
+require "config.nvim-tree"

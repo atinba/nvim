@@ -40,18 +40,6 @@ local on_attach = function(_, bufnr)
     end, { desc = "Format current buffer with LSP" })
 end
 
-local servers = {
-    lua_ls = {
-        Lua = {
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
-            diagnostics = {
-                globals = { "vim" },
-            },
-        },
-    },
-}
-
 cmp.setup {
     snippet = {
         expand = function(args)
@@ -66,7 +54,7 @@ cmp.setup {
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
         },
-        ['<Tab>'] = cmp.mapping(function(fallback)
+        --[[        ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
@@ -75,15 +63,15 @@ cmp.setup {
                 fallback()
             end
         end, { 'i', 's' }),
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
-            else
-                fallback()
-            end
-        end, { 'i', 's' }),
+--]]['<S-Tab>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+            cmp.select_prev_item()
+        elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+        else
+            fallback()
+        end
+    end, { 'i', 's' }),
     }),
     sources = {
         { name = 'nvim_lsp' },
@@ -91,9 +79,34 @@ cmp.setup {
     },
 }
 
+local servers = {
+    lua_ls = {
+        cmd = {
+            "lua-language-server"
+        },
+        settings = {
+            Lua = {
+                workspace = { checkThirdParty = false },
+                telemetry = { enable = false },
+                diagnostics = {
+                    globals = { "vim" },
+                },
+            },
+        },
+    },
+    clangd = {
+        cmd = {
+            "clangd",
+            "--query-driver=/nix/store/n43yr490xkg266y1fw3jm7bqhkqpvchp-i686-elf-gcc-wrapper-12.3.0/bin/i686-elf-gcc"
+        },
+    },
+}
 
-require("lspconfig")["lua_ls"].setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-    settings = servers[server_name],
-})
+for server_name, server in pairs(servers) do
+    require("lspconfig")[server_name].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = server.settings,
+        cmd = server.cmd,
+    })
+end

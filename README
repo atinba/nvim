@@ -1,3 +1,8 @@
+Issues
+- Tab not working in insert mode
+- clangd query driver issue
+    
+Todos
 - fix formatting
 - add lsp
 - add auto comment
