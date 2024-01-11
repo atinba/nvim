@@ -45,6 +45,7 @@ return packer.startup(function(use)
     use "navarasu/onedark.nvim"
     use "p00f/nvim-ts-rainbow"
     use "neovim/nvim-lspconfig"
+    use "lewis6991/gitsigns.nvim"
 
     -- Telescope
     use {

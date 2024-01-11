@@ -3,6 +3,8 @@ Issues
 - clangd query driver issue
     
 Todos
+- git blame
+- better nvim diff
 - fix formatting
 - add lsp
 - add auto comment
