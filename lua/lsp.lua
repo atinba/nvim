@@ -1,4 +1,5 @@
 local cmp = require("cmp")
+local luasnip = require("luasnip")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
@@ -40,21 +41,21 @@ local on_attach = function(_, bufnr)
     end, { desc = "Format current buffer with LSP" })
 end
 
-cmp.setup {
+cmp.setup({
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body)
         end,
     },
     mapping = cmp.mapping.preset.insert({
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<CR>'] = cmp.mapping.confirm {
+        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<CR>"] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
-        },
-        --[[        ['<Tab>'] = cmp.mapping(function(fallback)
+        }),
+        ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
@@ -62,27 +63,27 @@ cmp.setup {
             else
                 fallback()
             end
-        end, { 'i', 's' }),
---]]['<S-Tab>'] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-            cmp.select_prev_item()
-        elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-        else
-            fallback()
-        end
-    end, { 'i', 's' }),
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
     }),
     sources = {
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
     },
-}
+})
 
 local servers = {
     lua_ls = {
         cmd = {
-            "lua-language-server"
+            "lua-language-server",
         },
         settings = {
             Lua = {
@@ -97,7 +98,7 @@ local servers = {
     clangd = {
         cmd = {
             "clangd",
-            "--query-driver=/nix/store/n43yr490xkg266y1fw3jm7bqhkqpvchp-i686-elf-gcc-wrapper-12.3.0/bin/i686-elf-gcc"
+            "--query-driver=/nix/store/n43yr490xkg266y1fw3jm7bqhkqpvchp-i686-elf-gcc-wrapper-12.3.0/bin/i686-elf-gcc",
         },
     },
 }

@@ -17,7 +17,7 @@ local options = {
     tabstop = 4,
 
     list = true,
-    listchars = { tab = '>.', trail = '.' },
+    listchars = { tab = ">.", trail = "." },
 
     -- Line number
     relativenumber = true,

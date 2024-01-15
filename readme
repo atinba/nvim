@@ -1,12 +1,9 @@
 Issues
-- Tab not working in insert mode
 - clangd query driver issue
-    
+
 Todos
-- git blame
+- lualine
 - better nvim diff
-- fix formatting
-- add lsp
 - add auto comment
 - term
 - git
