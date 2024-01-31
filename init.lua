@@ -14,8 +14,18 @@ require("plugins")
 require("nvim-tree").setup()
 require("gitsigns").setup()
 require("neoscroll").setup()
-require("telescope").setup()
 require("leap").create_default_mappings()
+
+-- Telescope
+require("telescope").setup {
+    defaults = {
+        mappings = {
+            i = {
+                ["<esc>"] = "close",
+            },
+        },
+    },
+}
 
 -- Treesitter
 require("nvim-treesitter.configs").setup({
@@ -23,8 +33,8 @@ require("nvim-treesitter.configs").setup({
     sync_install = false,
     ignore_install = { "" }, -- List of parsers to ignore installing
     highlight = {
-        enable = true, -- false will disable the whole extension
-        disable = { "" }, -- list of language that will be disabled
+        enable = true,       -- false will disable the whole extension
+        disable = { "" },    -- list of language that will be disabled
         additional_vim_regex_highlighting = true,
     },
     indent = { enable = true, disable = { "yaml" } },
@@ -38,6 +48,8 @@ require("nvim-treesitter.configs").setup({
 
 -- Colorscheme
 require("onedark").setup({
+    transparent = true,
     style = "darker",
+    term_colors = false,
 })
 require("onedark").load()
