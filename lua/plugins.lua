@@ -40,36 +40,36 @@ packer.init({
 
 return packer.startup(function(use)
     use("wbthomason/packer.nvim") -- Have packer manage itself
-    use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
-    use("nvim-lua/plenary.nvim") -- Useful lua functions used by lots of plugins
-    use("navarasu/onedark.nvim")
-    use("p00f/nvim-ts-rainbow")
+    use("nvim-lua/popup.nvim")    -- An implementation of the Popup API from vim in Neovim
+    use("nvim-lua/plenary.nvim")  -- Useful lua functions used by lots of plugins
     use("neovim/nvim-lspconfig")
+    use("nvim-telescope/telescope.nvim")
+    use("nvim-treesitter/nvim-treesitter")
+
+    use("ggandor/leap.nvim")
+    use("navarasu/onedark.nvim")
+    use {
+        "folke/which-key.nvim",
+        config = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+        end
+    }
+
+    use("p00f/nvim-ts-rainbow")
     use("lewis6991/gitsigns.nvim")
     use("L3MON4D3/LuaSnip")
     use("saadparwaiz1/cmp_luasnip")
-    use("ggandor/leap.nvim")
     use("tpope/vim-repeat")
     use("karb94/neoscroll.nvim")
-
-    -- Telescope
-    use({
-        "nvim-telescope/telescope.nvim",
-        requires = { { "nvim-lua/plenary.nvim" } },
-    })
-
-    -- Treesitter
-    use({
-        "nvim-treesitter/nvim-treesitter",
-        run = ":TSUpdate",
-    })
+    use("nvim-pack/nvim-spectre")
 
     -- Collection of configurations for built-in LSP client
     use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-    use("hrsh7th/nvim-cmp") -- Autocompletion plugin
+    use("hrsh7th/nvim-cmp")                            -- Autocompletion plugin
     use({ "hrsh7th/cmp-nvim-lsp" })
-    use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" }) -- buffer auto-completion
-    use({ "hrsh7th/cmp-path", after = "nvim-cmp" }) -- path auto-completion
+    use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })  -- buffer auto-completion
+    use({ "hrsh7th/cmp-path", after = "nvim-cmp" })    -- path auto-completion
     use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" }) -- cmdline auto-completion
     use({
         "nvim-tree/nvim-tree.lua",

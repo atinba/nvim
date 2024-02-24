@@ -14,6 +14,7 @@ require("plugins")
 require("nvim-tree").setup()
 require("gitsigns").setup()
 require("neoscroll").setup()
+require('spectre').setup()
 require("leap").create_default_mappings()
 
 -- Telescope
@@ -29,7 +30,7 @@ require("telescope").setup {
 
 -- Treesitter
 require("nvim-treesitter.configs").setup({
-    ensure_installed = "all",
+    enure_installed = { "c", "lua", "cpp", "python" },
     sync_install = false,
     ignore_install = { "" }, -- List of parsers to ignore installing
     highlight = {
