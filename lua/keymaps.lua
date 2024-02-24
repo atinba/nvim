@@ -1,5 +1,3 @@
-local wk = require("which-key")
-
 local opts = { noremap = true, silent = true }
 local term_opts = { silent = true }
 
@@ -37,22 +35,14 @@ keymap("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", opts)
 
 -- Telescope
 keymap("n", "<leader>ft", "<cmd>Telescope<cr>", opts)
+keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
+keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opts)
 keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", opts)
 keymap("n", "<leader>fm", "<cmd>Telescope man_pages<cr>", opts)
 
--- TODO: configure
-wk.register({
-    f = {
-        name = "file",
-        f = { "<cmd>Telescope find_files<cr>", "Find Files" },
-        g = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
-    },
-    { prefix = "<leader>" }
-})
-
 -- Spectre
-keymap('n', '<leader>S', '<cmd>Spectre<CR>', opts) -- TODO: <leader>s is slower than <leader>S, why? fix it.
+keymap('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', opts)
 keymap('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', opts)
 keymap('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', opts)
 keymap('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', opts)
