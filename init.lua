@@ -30,15 +30,16 @@ require("telescope").setup {
 
 -- Treesitter
 require("nvim-treesitter.configs").setup({
-    enure_installed = { "c", "lua", "cpp", "python" },
-    sync_install = false,
-    ignore_install = { "" }, -- List of parsers to ignore installing
+    enure_installed = "all",
+    sync_install = true,
     highlight = {
-        enable = true,       -- false will disable the whole extension
-        disable = { "" },    -- list of language that will be disabled
+        enable = true,
         additional_vim_regex_highlighting = true,
     },
-    indent = { enable = true, disable = { "yaml" } },
+    indent = {
+        enable = true,
+        disable = { "yaml" }
+    },
 
     rainbow = {
         enable = true,

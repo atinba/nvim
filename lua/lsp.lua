@@ -98,7 +98,6 @@ local servers = {
     clangd = {
         cmd = {
             "clangd",
-            "--query-driver=/nix/store/n43yr490xkg266y1fw3jm7bqhkqpvchp-i686-elf-gcc-wrapper-12.3.0/bin/i686-elf-gcc",
         },
     },
 }

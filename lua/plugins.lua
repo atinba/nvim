@@ -44,7 +44,11 @@ return packer.startup(function(use)
     use("nvim-lua/plenary.nvim")  -- Useful lua functions used by lots of plugins
     use("neovim/nvim-lspconfig")
     use("nvim-telescope/telescope.nvim")
-    use("nvim-treesitter/nvim-treesitter")
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
+    }
+    use("tpope/vim-surround")
 
     use("ggandor/leap.nvim")
     use("navarasu/onedark.nvim")
@@ -77,6 +81,16 @@ return packer.startup(function(use)
             "nvim-tree/nvim-web-devicons", -- optional
         },
     })
+    use("folke/zen-mode.nvim")
+
+    use {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        config = function()
+            require("nvim-autopairs").setup {}
+        end
+    }
+    use("windwp/nvim-ts-autotag")
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if PACKER_BOOTSTRAP then
