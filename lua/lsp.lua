@@ -1,4 +1,5 @@
 local cmp = require("cmp")
+local lspconfig = require('lspconfig')
 local luasnip = require("luasnip")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
@@ -76,6 +77,8 @@ cmp.setup({
     }),
     sources = {
         { name = "nvim_lsp" },
+        { name = "buffer" },
+        { name = "path" },
         { name = "luasnip" },
     },
 })
@@ -110,3 +113,47 @@ for server_name, server in pairs(servers) do
         cmd = server.cmd,
     })
 end
+
+lspconfig.rust_analyzer.setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+    settings = {
+        ["rust-analyzer"] = {
+            imports = {
+                granularity = {
+                    group = "module",
+                },
+                prefix = "self",
+            },
+            cargo = {
+                buildScripts = {
+                    enable = true,
+                },
+            },
+            procMacro = {
+                enable = true
+            },
+        }
+    }
+}
+
+lspconfig.gopls.setup({})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+    local params = vim.lsp.util.make_range_params()
+    params.context = {only = {"source.organizeImports"}}
+    -- Adjust the timeout if necessary (default is 1000ms)
+    local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
+    for cid, res in pairs(result or {}) do
+      for _, r in pairs(res.result or {}) do
+        if r.edit then
+          local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+          vim.lsp.util.apply_workspace_edit(r.edit, enc)
+        end
+      end
+    end
+    vim.lsp.buf.format({async = false})
+  end,
+})

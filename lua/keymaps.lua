@@ -20,15 +20,15 @@ keymap("n", "<S-h>", ":bprevious<CR>", opts)
 -- Switching b/w modes
 keymap("i", "jk", "<ESC>", opts)
 keymap("i", "kj", "<ESC>", opts)
-keymap("i", "<ESC>", "<NOP>", opts)
+-- keymap("i", "<ESC>", "<NOP>", opts)
 
 keymap("v", "jk", "<ESC>", opts)
 keymap("v", "kj", "<ESC>", opts)
-keymap("v", "<ESC>", "<NOP>", opts)
+--keymap("v", "<ESC>", "<NOP>", opts)
 
 keymap("c", "jk", "<ESC>", opts)
 keymap("c", "kj", "<ESC>", opts)
-keymap("c", "<ESC>", "<NOP>", opts)
+--keymap("c", "<ESC>", "<NOP>", opts)
 
 -- NvimTree
 keymap("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", opts)

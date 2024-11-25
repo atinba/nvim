@@ -22,7 +22,7 @@ local options = {
     -- Line number
     relativenumber = true,
     numberwidth = 2,
-    scrolloff = 8,
+    scrolloff = 16,
 
     undofile = true,
     updatetime = 300,

@@ -60,6 +60,8 @@ return packer.startup(function(use)
         end
     }
 
+    use("dense-analysis/ale")
+
     use("p00f/nvim-ts-rainbow")
     use("lewis6991/gitsigns.nvim")
     use("L3MON4D3/LuaSnip")
