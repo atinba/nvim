@@ -49,9 +49,5 @@ require("nvim-treesitter.configs").setup({
 })
 
 -- Colorscheme
-require("onedark").setup({
-    transparent = true,
-    style = "darker",
-    term_colors = false,
-})
-require("onedark").load()
+vim.o.background = "dark" -- or "light" for light mode
+vim.cmd([[colorscheme gruvbox]])

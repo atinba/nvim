@@ -52,6 +52,7 @@ return packer.startup(function(use)
 
     use("ggandor/leap.nvim")
     use("navarasu/onedark.nvim")
+    use { "ellisonleao/gruvbox.nvim" }
     use {
         "folke/which-key.nvim",
         config = function()
@@ -98,4 +99,7 @@ return packer.startup(function(use)
     if PACKER_BOOTSTRAP then
         require("packer").sync()
     end
+
+    -- Packer
+    use "sindrets/diffview.nvim"
 end)
